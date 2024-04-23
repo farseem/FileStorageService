@@ -3,6 +3,8 @@ package com.farsim.filemanager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.farsim.filemanager.StorageType.*;
+
 @Component
 public class FileStorageFactory {
     @Autowired
@@ -16,11 +18,11 @@ public class FileStorageFactory {
 
     public FileStorageService getFileStorageService(String storageType) {
         switch (storageType) {
-            case "local":
+            case LOCAL_STORAGE:
                 return localFileStorageService;
-            case "aws":
+            case AWS_S3:
                 return awsS3FileStorageService;
-            case "azure":
+            case AZURE_BLOB:
                 return azureFileStorageService;
             default:
                 throw new IllegalArgumentException("Invalid storage type");

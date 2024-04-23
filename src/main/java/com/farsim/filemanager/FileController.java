@@ -1,14 +1,13 @@
 package com.farsim.filemanager;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.helpers.NOPLogger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@Slf4j
 @RestController
 @RequestMapping("/files")
 public class FileController {
@@ -17,15 +16,15 @@ public class FileController {
 
     @GetMapping("/test")
     public ResponseEntity<String> test() {
-        String fileId = String.valueOf(Math.random());// generate unique file ID
-        Logger logger = LoggerFactory.getLogger(FileController.class);
-        logger.info("Test end point!");
+        String fileId = String.valueOf(Math.random()); // generate unique file ID
+
+        log.info("Test end point!");
         return ResponseEntity.ok(fileId);
     }
 
     @PostMapping("/{storageType}")
     public ResponseEntity<String> uploadFile(@PathVariable String storageType, @RequestParam("file") MultipartFile file) {
-        String fileId = String.valueOf(Math.random());// generate unique file ID
+        String fileId = String.valueOf(Math.random()); // generate unique file ID
         // fileManagementService.storeFile(storageType, fileId, file);
         return ResponseEntity.ok(fileId);
     }
